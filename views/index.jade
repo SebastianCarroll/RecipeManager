@@ -1,0 +1,73 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    script(type='text/javascript', src='/javascripts/lib/jquery-2.0.2.js')
+    script(type='text/javascript', src='/javascripts/lib/bootstrap.js')
+    script(data-main='/javascripts/main', src='/javascripts/lib/require.js')
+  body
+    block content
+        .container
+            .navbar(data-spy="affix-top")
+                .navbar-inner
+                    a.brand(href='#') Title
+                    ul.nav
+                      li.active
+                        a(href='#') Home
+                      li
+                        a(href='#') Link
+                      li
+                        a(href='#') Link
+                    ul.nav.pull-right
+                      li
+                        .btn-group
+                          button.btn.primary.dropdown-toggle(data-toggle='dropdown')
+                            span.caret
+                          ul.dropdown-menu.pull-right
+                            li
+                              a(href ="/recipe/new") Add Recipe
+                            li
+                              a(href='#') Import
+                            li
+                              a(href='#', data-bind="click: createAlert") Alert
+                            li.divider
+                            li
+                              a(href='#', data-bind="click: ajaxReload") Ajax refresh
+                    form.navbar-search.pull-right
+                      input.search-query(type='text', placeholder='Search')
+            
+            .page-header
+                h1= title
+            #recipes
+                - each recipe in recipes
+                  div.recipe
+                    div.created_at= recipe.created_at
+                    div.title= recipe.title
+                    div.comments= recipe.comments
+                        form( method  ="post", action="/recipe/:id/delete") 
+                            input(name ="_id", type="hidden", value=recipe._id.toHexString()) 
+                            input(id   ="delete", value="X", type="submit")
+                        form( method   ="get", action="/recipe/:id/edit") 
+                            input(name ="_id", type="hidden", value=recipe._id.toHexString()) 
+                            input(id   ="edit", value="Edit", type="submit")
+                //a(href ="/recipe/new")!= "Add New Recipe"
+            .knockoutTestDiv
+                .recipe_display(data-bind="foreach: recipes")
+                    //pre(data-bind='text: ko.toJSON($data, null, 2)').
+                    div(data-bind="template: { name: 'min-recipe-template', data: $data}")
+    script#min-recipe-template(type='text/html')
+        //h3(data-bind='text: title')
+        h3
+            a(href='#', data-bind='text: title') heading
+        p
+            | Descr:
+            span(data-bind='text: description')
+        p
+            | Rating:
+            span(data-bind='text: rating')
+        p
+            | Time:
+            span(data-bind='text: time().total')
+        

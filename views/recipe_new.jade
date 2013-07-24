@@ -1,0 +1,110 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    script(type='text/javascript', src='/javascripts/lib/jquery-2.0.2.js')
+    script(type='text/javascript', src='/javascripts/lib/bootstrap.js')
+    script(data-main='/javascripts/newRecipe', src='/javascripts/lib/require.js')
+  body
+    block content
+        h1= title
+        //pre(data-bind='text: ko.toJSON($data, null, 2)').
+        div.newrecipe
+            form.form-horizontal(method="post")
+                .row-fluid
+                    .span6 
+                        .control-group
+                            label.control-label(for='recipeTitle') Title
+                            .controls
+                                input#recipeTitle(type='text', name='title', placeholder='Title', data-bind='value: title')
+                    .span6 
+                        .control-group
+                            label.control-label(for='recipeRating') Rating
+                            .controls
+                                input#recipeRating(type='text', name='rating', placeholder='Rating', data-bind='value: rating')
+                .row-fluid
+                    .span6
+                        .control-group
+                            label.control-label(for='recipeDesc') Description
+                            .controls
+                                textarea#recipeDesc(name='description', cols='40', rows='2', data-bind='value: description')            
+                    .span6
+                        //pre(data-bind='text: ko.toJSON($data, null, 2)').
+                        .control-group
+                            label.control-label(for='tTime') Time
+                            .controls
+                                p#tTime(data-bind='text: time.total')
+                .row-fluid  
+                    .span6               
+                        .control-group
+                            label.control-label(for='recipeComms') Comments
+                            .controls
+                                //input#recipeComms(type='text', name='comments', placeholder='Comments')
+                                textarea#recipeComms(name='comments', cols='90', rows='2', data-bind="value: comments")
+                    .span6              
+                        .control-group
+                            label.control-label(for='pTime') Preparation
+                            .controls
+                                input#pTime(type='text', name='pTime', placeholder='Preparation Time', data-bind='value: time.prep')
+                        .control-group
+                            label.control-label(for='cTime') Cooking
+                            .controls
+                                input#cTime(type='text', name='cTime', placeholder='Cooking Time', data-bind='value: time.cook')
+                        
+                .row-fluid
+                    .span6
+                        .control-group
+                            label.control-label Add Ingredient
+                            .controls        
+                                .row-fluid
+                                    .span11
+                                        input#recipeIngr(type='text', 
+                                                         name='ingredientNew', 
+                                                         placeholder='Ingredient'
+                                                         data-bind="value: newIngr")
+                                    .span1
+                                        button.btn.btn-info(type='button', data-bind="click: addNewIngr") +                       
+                        .control-group
+                            label.control-label Ingredients
+                            .controls(data-bind="foreach: ingredients")
+                                .row-fluid
+                                    .span11
+                                        input(type='text', name='ingredients', placeholder='Ingredients', data-bind="value: $data" )
+                                    .span1
+                                        button.btn.btn-danger(type='button', data-bind="click: $root.removeIngr") -
+                                        //button.btn.btn-info(type='button', data-bind='visible: (ingredients.length === 1)') +
+
+                    
+                .row-fluid
+                    .span8          
+                        .control-group
+                            label.control-label Add Step
+                            .controls        
+                                .row-fluid
+                                    .span11
+                                        input(type='text', 
+                                              name='stepNew', 
+                                              placeholder='Instructions'
+                                              data-bind="value: newMethodStep")
+                                    .span1
+                                        button.btn.btn-info(type='button', data-bind="click: addNewMethodStep") +
+                        .control-group
+                            label.control-label Method
+                            .controls(data-bind="foreach: method")
+                                //input#recipeComms(type='text', name='method', placeholder='Method 1')
+                                //textarea.wide-text-area(name='method', cols='90', rows='1', data-bind='value: $data')
+                                .row-fluid
+                                    .span11
+                                        textarea.wide-text-area(name='method', cols='90', rows='1', data-bind='value: $data')
+                                        //input(type='text', name='ingredients', placeholder='Ingredients', data-bind="value: $data" )
+                                    .span1
+                                        button.btn.btn-danger(type='button', data-bind="click: $root.removeMethodStep") -
+
+                //.control-group
+                    .controls
+                        button.btn(type='submit') Save
+            a(href="/")!= "Back to Recipe List"
+            //pre(data-bind='text: ko.toJSON($data, null, 2)').
+            button.btn(type='button', data-bind="click: ajaxSave") Save via ajax
