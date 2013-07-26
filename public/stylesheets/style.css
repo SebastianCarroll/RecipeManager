@@ -70,3 +70,10 @@ input[type =submit] {
   text-align: left;
   float: left;
 }
+.right-tab {
+  position: fixed;
+  top: 50%;
+  width: 1100px;
+  background-color: #f00;
+  text-align: right;
+}

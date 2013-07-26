@@ -59,8 +59,8 @@ html
                     div(data-bind="template: { name: 'min-recipe-template', data: $data}")
     script#min-recipe-template(type='text/html')
         //h3(data-bind='text: title')
-        h3
-            a(href='#', data-bind='text: title') heading
+        pre(data-bind='text: ko.toJSON($parent, null, 2)').
+        h3(data-bind='text: title, click: fullView') heading
         p
             | Descr:
             span(data-bind='text: description')

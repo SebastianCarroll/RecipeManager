@@ -13,7 +13,6 @@ require(['knockout', 'jquery', 'recipeUtils/cookTime', 'recipeUtils/recipe'],
         var self = this;
         
         self.recipes = ko.observableArray([]);
-        self.view = ko.observable('index');
         self.current = ko.observable();
         
         function getCurrent(id) {
@@ -27,17 +26,11 @@ require(['knockout', 'jquery', 'recipeUtils/cookTime', 'recipeUtils/recipe'],
             return retRec;
         }
         
-        self.fullView = function (id) {
-            self.view('view');
-            self.current(getCurrent(id));
-        }
         
         self.createAlert = function () {
             alert("Yay!");
         };
-        
-        
-        
+
         self.ajaxReload = function () {
             $.ajax({
                 type: 'GET',

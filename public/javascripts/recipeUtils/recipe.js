@@ -60,13 +60,26 @@ function(ko, Ingr, CookTime) {
             return jsSelf;
         };
         
+        self.fullView = function () {
+            alert("Moving to view");
+            $.get(
+                '/recipe/:id/view',
+                {_id: self._id}
+            ).done(function () {
+                alert("DONE");
+            })
+            .fail(function () {
+                alert("FAIL");
+            }); 
+        }
+        
         self.update = function(recipe) {
             $.each(recipe, function(key, val){
                 if(self[key]) {
                     if(key === "time"){
-                        self[key](val ? new CookTime(val) : self[key]);
+                        self[key](val ? new CookTime(val) : self[key]());
                     } else {
-                        self[key](val ? val : self[key]);
+                        self[key](val ? val : self[key]());
                     }
                 }
             });
