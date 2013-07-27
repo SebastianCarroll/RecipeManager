@@ -72,3 +72,6 @@ input[type =submit] {
   background-color: #f00;
   text-align: right;
 }
+.min-recipe-controls {
+  width: 5em;
+}

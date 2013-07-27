@@ -61,13 +61,20 @@ html
         //h3(data-bind='text: title')
         //pre(data-bind='text: ko.toJSON($parent, null, 2)').
         h3(data-bind='text: title, click: fullView') heading
-        p
-            | Descr:
-            span(data-bind='text: description')
-        p
-            | Rating:
-            span(data-bind='text: rating')
-        p
-            | Time:
-            span(data-bind='text: time().total')
+        .min-recipe-info.pull-left.well
+            p
+                | Descr:
+                span(data-bind='text: description')
+            p
+                | Rating:
+                span(data-bind='text: rating')
+            p
+                | Time:
+                span(data-bind='text: time().total')
+        .min-recipe-controls.pull-right.well
+            button.btn.btn-info.btn-block(type='button') View
+            button.btn.btn-info.btn-block(type='button') Edit
+            button.btn.btn-info.btn-block(type='button') Delete
+            
+            
         
