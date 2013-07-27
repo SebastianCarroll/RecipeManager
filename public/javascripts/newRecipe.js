@@ -19,20 +19,12 @@ require.config({
 
 require(['bootstrap', 'knockout', 'jquery', 'recipeUtils/cookTime'],
     function (bs, ko, $, CookTime) {
-/*          var CookTime = function CookTime() {
-            var self = this;
-            self.prep = ko.observable(0);
-            self.cook = ko.observable(0);
-            self.total = ko.computed(function () {
-                return parseInt(self.prep()) + parseInt(self.cook());
-            });
-        } */
         function NewRecipeViewModel() {
             var self = this;
             
             self.title = ko.observable('');
             self.ingredients = ko.observableArray([]);
-            self.method = ko.observableArray(['step 1', 'do step one again', 'step 3']);
+            self.method = ko.observableArray([]);
             self.description = ko.observable('');
             self.comments = ko.observable('');
             self.rating = ko.observable(0);
@@ -75,15 +67,6 @@ require(['bootstrap', 'knockout', 'jquery', 'recipeUtils/cookTime'],
                 }); 
             }
             
-/*             self.toJSON = function() {
-                var copy = ko.toJS(self);
-                var ignoredFields = ['newMethodStep', 'newIngr'];
-                
-                $.each(ignoredFields, function(i,f){
-                    if(copy[f]) delete copy[f];
-                });
-                return JSON.stringify(copy);
-            }; */
         };
         
         NewRecipeViewModel.prototype.toJSON = function() {
@@ -97,58 +80,4 @@ require(['bootstrap', 'knockout', 'jquery', 'recipeUtils/cookTime'],
         };
         
         ko.applyBindings(new NewRecipeViewModel());
-    /*
-        var NewRecipeViewModel = function NewRecipeViewModel() {
-            var self = this;
-            
-            self.ingredients = ko.observableArray([]);
-            self.method = ko.observableArray(['step 1', 'do step one again', 'step 3']);
-            
-            self.time = new CookTime();
-            //self.time = new time.CookTime();
-            
-            // Change to a proper nested CookTime object whenwork out how
-            self.prep = ko.observable(10);
-            self.cook = ko.observable(23);
-            self.total = ko.computed(function () {
-                return parseInt(self.prep()) + parseInt(self.cook());
-            });
-            
-            self.newIngr = ko.observable('');
-            
-            self.createAlert = function () {
-                alert("Yay!");
-            };
-            
-            self.addNewIngr = function () {
-                self.ingredients.push(self.newIngr());
-            };
-            
-            self.addOnEnter = function(event) {
-                var keyCode = (event.which ? event.which : event.keyCode);
-                if (keyCode === 13) {
-                    self.addNewIngr();
-                    return false;
-                }
-                return true;
-            };
-            
-            self.ajaxSave = function () {
-                console.log("Saving via ajax");
-                $.ajax({
-                    type: 'POST',
-                    url: '/recipe/new',
-                    data: {
-                        title: 'title', 
-                        ingredients: 'ingreds', 
-                        comments: 'comms'
-                    },
-                    success: function () {
-                        alert('Success!');
-                    }
-                });
-            };
-        };
-        
-        ko.applyBindings(new NewRecipeViewModel()); */
 });

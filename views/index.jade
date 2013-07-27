@@ -23,7 +23,7 @@ html
                     ul.nav.pull-right
                       li
                         .btn-group
-                          button.btn.primary.dropdown-toggle(data-toggle='dropdown')
+                          button.btn.dropdown-toggle(data-toggle='dropdown')
                             span.caret
                           ul.dropdown-menu.pull-right
                             li
@@ -37,22 +37,8 @@ html
                               a(href='#', data-bind="click: ajaxReload") Ajax refresh
                     form.navbar-search.pull-right
                       input.search-query(type='text', placeholder='Search')
-            
             .page-header
                 h1= title
-            #recipes
-                - each recipe in recipes
-                  div.recipe
-                    div.created_at= recipe.created_at
-                    div.title= recipe.title
-                    div.comments= recipe.comments
-                        form( method  ="post", action="/recipe/:id/delete") 
-                            input(name ="_id", type="hidden", value=recipe._id.toHexString()) 
-                            input(id   ="delete", value="X", type="submit")
-                        form( method   ="get", action="/recipe/:id/edit") 
-                            input(name ="_id", type="hidden", value=recipe._id.toHexString()) 
-                            input(id   ="edit", value="Edit", type="submit")
-                //a(href ="/recipe/new")!= "Add New Recipe"
             .knockoutTestDiv
                 .recipe_display(data-bind="foreach: recipes")
                     //pre(data-bind='text: ko.toJSON($data, null, 2)').
@@ -60,21 +46,30 @@ html
     script#min-recipe-template(type='text/html')
         //h3(data-bind='text: title')
         //pre(data-bind='text: ko.toJSON($parent, null, 2)').
-        h3(data-bind='text: title, click: fullView') heading
-        .min-recipe-info.pull-left.well
-            p
-                | Descr:
-                span(data-bind='text: description')
-            p
-                | Rating:
-                span(data-bind='text: rating')
-            p
-                | Time:
-                span(data-bind='text: time().total')
-        .min-recipe-controls.pull-right.well
-            button.btn.btn-info.btn-block(type='button') View
-            button.btn.btn-info.btn-block(type='button') Edit
-            button.btn.btn-info.btn-block(type='button') Delete
+        .row-fluid.well
+            .span10
+                h3(data-bind='text: title, click: fullView')
+                .min-recipe-info
+                    p
+                        | Descr:
+                        span(data-bind='text: description')
+                    p
+                        | Rating:
+                        span(data-bind='text: rating')
+                    p
+                        | Time:
+                        span(data-bind='text: time().total')
+            .span2
+                .dropdown.btn-group.pull-right
+                    a.btn.dropdown-toggle(data-toggle='dropdown', href='#')
+                        span.caret
+                      ul.dropdown-menu
+                        li
+                            button.btn.btn-block(type='button',data-bind='click: fullView') View
+                        li
+                            button.btn.btn-block(type='button',data-bind='click: editView') Edit
+                        li
+                            button.btn.btn-block(type='button',data-bind='click: deleteRecipe') Delete
             
             
         

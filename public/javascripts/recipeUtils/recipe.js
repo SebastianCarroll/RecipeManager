@@ -69,6 +69,22 @@ function(ko, Ingr, CookTime, formU) {
             formU.createFormAndSubmit(path, method, parameters); 
         }
         
+        self.editView = function () {
+            var path = '/recipe/:id/edit',
+                method = 'get',
+                parameters = { _id : self._id()};
+                
+            formU.createFormAndSubmit(path, method, parameters); 
+        }
+        
+        self.deleteRecipe = function () {
+            var path = '/recipe/:id/delete',
+                method = 'post',
+                parameters = { _id : self._id()};
+                
+            formU.createFormAndSubmit(path, method, parameters); 
+        }
+        
         self.update = function(recipe) {
             $.each(recipe, function(key, val){
                 if(self[key]) {
