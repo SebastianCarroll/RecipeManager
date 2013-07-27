@@ -3,8 +3,9 @@
  */
 define(['knockout',
          'recipeUtils/ingredient',
-         'recipeUtils/cookTime'], 
-function(ko, Ingr, CookTime) {
+         'recipeUtils/cookTime',
+         'lib/formUtils'], 
+function(ko, Ingr, CookTime, formU) {
     return function Recipe(init) {
         var self = this;
         
@@ -61,16 +62,11 @@ function(ko, Ingr, CookTime) {
         };
         
         self.fullView = function () {
-            alert("Moving to view");
-            $.get(
-                '/recipe/:id/view',
-                {_id: self._id}
-            ).done(function () {
-                alert("DONE");
-            })
-            .fail(function () {
-                alert("FAIL");
-            }); 
+            var path = '/recipe/:id/view',
+                method = 'get',
+                parameters = { _id : self._id()};
+                
+            formU.createFormAndSubmit(path, method, parameters); 
         }
         
         self.update = function(recipe) {
