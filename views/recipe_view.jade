@@ -16,9 +16,15 @@ html
     block content
         h1(data-bind="text: recipe().title")
         .ingredients
-            pre(data-bind='text: ko.toJSON($data, null, 2)').
-            //.recipe_display(data-bind="foreach: recipe().ingredients")
+            .ingr_display(data-bind="foreach: recipe().ingredients")
+                div(data-bind="template: {name: 'ingredient-template',data: $data}")
         .method
-
-         
+            .method_display(data-bind="foreach: recipe().method")
+                div(data-bind="template: {name: 'method-template',data: $data, index: $index()}")
             
+    script#ingredient-template(type='text/html')
+        .ingredient(data-bind="text: $data")
+    script#method-template(type='text/html')
+        .step
+            p(data-bind="text: 'Step:' + $index()")
+            p(data-bind="text: $data")
