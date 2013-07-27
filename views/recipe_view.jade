@@ -11,8 +11,14 @@ html
             var r = '!{recipeJSON}';
             return JSON.parse(r);
             }
-    script(data-main='/javascripts/newRecipe', src='/javascripts/lib/require.js')
+    script(data-main='/javascripts/recipe_view', src='/javascripts/lib/require.js')
   body
     block content
-        h1= title
+        h1(data-bind="text: recipe().title")
+        .ingredients
+            pre(data-bind='text: ko.toJSON($data, null, 2)').
+            //.recipe_display(data-bind="foreach: recipe().ingredients")
+        .method
+
+         
             

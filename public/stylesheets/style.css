@@ -2,7 +2,6 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 13px;
-  text-align: center;
   text-stroke: 1px rgba(255,255,255,0.1);
   color: #555;
 }
@@ -21,8 +20,6 @@ h1 {
 }
 #recipes {
   text-align: left;
-  margin-left: auto;
-  margin-right: auto;
   width: 320px;
 }
 #recipes .recipe {
@@ -40,8 +37,6 @@ h1 {
 }
 .newrecipe {
   width: 900px;
-  margin-left: auto;
-  margin-right: auto;
   padding: 14px;
 }
 input[type =text] {
@@ -63,7 +58,7 @@ input[type =submit] {
   float: left;
 }
 .dropdown-menu.pull-right .li {
-  lext-align: left;
+  text-align: left;
 }
 .wide-text-area {
   width: 340px;
