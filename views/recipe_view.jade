@@ -6,6 +6,11 @@ html
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
     script(type='text/javascript', src='/javascripts/lib/jquery-2.0.2.js')
     script(type='text/javascript', src='/javascripts/lib/bootstrap.js')
+    script        
+        function getRecipeObject() {
+            var r = '!{recipeJSON}';
+            return JSON.parse(r);
+            }
     script(data-main='/javascripts/newRecipe', src='/javascripts/lib/require.js')
   body
     block content

@@ -72,7 +72,8 @@ app.get('/recipe/:id/view', function(req, res) {
             function(error, recipe) {
                 res.render('recipe_view',
                 { 
-                    recipe: recipe
+                    //recipe: recipe
+                    recipeJSON: JSON.stringify(recipe)
                 });
         });
 });
