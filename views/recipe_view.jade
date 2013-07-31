@@ -15,16 +15,26 @@ html
   body
     block content
         h1(data-bind="text: recipe().title")
-        .ingredients
-            .ingr_display(data-bind="foreach: recipe().ingredients")
-                div(data-bind="template: {name: 'ingredient-template',data: $data}")
-        .method
-            .method_display(data-bind="foreach: recipe().method")
-                div(data-bind="template: {name: 'method-template',data: $data, index: $index()}")
+        .row-fluid
+            .span4
+                h3 Ingredients
+                .ingr_display(data-bind="foreach: recipe().ingredients")
+                     div(data-bind="template: {name: 'ingredient-template',data: $data}")
+            .span8
+                h3 Method
+                .method_display(data-bind="foreach: recipe().method")
+                    div(data-bind="template: {name: 'method-template',data: $data, index: $index()}")
             
     script#ingredient-template(type='text/html')
-        .ingredient(data-bind="text: $data")
+           form
+            fieldset
+                label.checkbox
+                    input(type='checkbox') 
+                    p(data-bind="html: $data")
     script#method-template(type='text/html')
-        .step
-            p(data-bind="text: 'Step:' + $index()")
-            p(data-bind="text: $data")
+        .row-fluid
+            .span1
+                p(data-bind="text: 'Step ' + $index()")
+            .span8
+                p(data-bind="text: $data")
+                
