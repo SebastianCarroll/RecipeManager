@@ -87,10 +87,17 @@ function(ko, Ingr, CookTime, formU) {
         
         self.update = function(recipe) {
             $.each(recipe, function(key, val){
+                // Checking via string name like this is bound to break
+                // Make more robust
                 if(self[key]) {
                     if(key === "time"){
                         self[key](val ? new CookTime(val) : self[key]());
-                    } else {
+                    } else if(key === "ingredients"){
+                        // Change this so that ingredients becomes an 
+                        // observableArray of observables
+                        self[key](val ? val : self[key]());
+                    }
+                    else {
                         self[key](val ? val : self[key]());
                     }
                 }

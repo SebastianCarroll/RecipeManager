@@ -16,6 +16,20 @@ html
     block content
         h1(data-bind="text: recipe().title")
         .row-fluid
+            .span1
+                p Servings:
+            .span1
+                .servings(data-bind="text: recipe().servings")
+            .span1
+                p Rating:
+            .span1
+                p(data-bind="text: recipe().rating")
+        .row-fluid
+            .span1
+                p Time:
+            .span1
+                p(data-bind="text: recipe().time().total")
+        .row-fluid
             .span4
                 h3 Ingredients
                 .ingr_display(data-bind="foreach: recipe().ingredients")
