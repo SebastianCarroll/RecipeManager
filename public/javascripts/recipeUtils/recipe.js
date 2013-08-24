@@ -67,7 +67,7 @@ function(ko, Ingr, CookTime, formU) {
                 parameters = { _id : self._id()};
                 
             formU.createFormAndSubmit(path, method, parameters); 
-        }
+        };
         
         self.editView = function () {
             var path = '/recipe/:id/edit',
@@ -75,7 +75,7 @@ function(ko, Ingr, CookTime, formU) {
                 parameters = { _id : self._id()};
                 
             formU.createFormAndSubmit(path, method, parameters); 
-        }
+        };
         
         self.deleteRecipe = function () {
             var path = '/recipe/:id/delete',
@@ -83,7 +83,7 @@ function(ko, Ingr, CookTime, formU) {
                 parameters = { _id : self._id()};
                 
             formU.createFormAndSubmit(path, method, parameters); 
-        }
+        };
         
         self.update = function(recipe) {
             $.each(recipe, function(key, val){
@@ -106,5 +106,5 @@ function(ko, Ingr, CookTime, formU) {
         
         //constructor? This seems odd
         self.update(init);
-    }
+    };
 });

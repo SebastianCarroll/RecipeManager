@@ -1,8 +1,19 @@
 require.config({
     baseUrl: "/javascripts/",
     paths: {
+        bootstrap: "lib/bootstrap",
         jquery: "lib/jquery-2.0.2",
         knockout: "lib/knockout-2.2.1.debug"
+        
+    },
+    shim: {
+        'jquery': {
+            exports: '$'
+        },
+        'bootstrap': {
+            deps: ['jquery'],
+            exports: "$.fn.popover"
+        }
     }
 });
 
@@ -22,32 +33,22 @@ require(['knockout', 'jquery', 'recipeUtils/cookTime', 'recipeUtils/recipe', 'li
             self.newIngr('');
         };
         
+        self.removeIngr = function(ingr, event) {
+            self.recipe().ingredients.remove(ingr);
+        };
+        
         self.addNewMethodStep = function () {
             self.recipe().method.push(self.newMethodStep());
             self.newMethodStep('');
         };
         
+        self.removeMethodStep = function(step, event) {
+            self.recipe().method.remove(step);
+        };
+        
         self.createAlert = function () {
             alert("Yay!");
         };
-        
-        /* self.ajaxReload = function () {
-            $.ajax({
-                type: 'GET',
-                url: '/all',
-                contentType:"application/json; charset=utf-8",
-                success: function (recipes, arg2, arg3) {
-                    //alert('Success!');
-                    //self.recipes(recipes);
-                    //var newRecipe = new Recipe(recipes[0]);
-                    $.each(recipes,function(index, rec) {
-                        self.recipes.push(new Recipe(rec));
-                        console.log(JSON.stringify(rec));
-                    });
-                    console.log("Success!");
-                }
-            }); 
-        }; */
     };
     var mainVM = new mainViewModel();
     ko.applyBindings(mainVM);

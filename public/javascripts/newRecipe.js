@@ -40,17 +40,19 @@ require(['bootstrap', 'knockout', 'jquery', 'recipeUtils/cookTime'],
             
             self.addNewMethodStep = function () {
                 self.method.push(self.newMethodStep());
-            }
+            };
+            
             self.removeMethodStep = function (method, event) {
                 self.method.remove(method);
-            }
+            };
             
             self.addNewIngr = function () {
                 self.ingredients.push(self.newIngr());
             };
+            
             self.removeIngr = function (ingr, event) {
                 self.ingredients.remove(ingr);
-            }
+            };
             
             self.ajaxSave = function () {
                 var data = ko.toJSON(self);
@@ -65,7 +67,7 @@ require(['bootstrap', 'knockout', 'jquery', 'recipeUtils/cookTime'],
                         alert('Success!');
                     }
                 }); 
-            }
+            };
             
         };
         
