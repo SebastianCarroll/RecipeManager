@@ -67,7 +67,7 @@ html
                                     input#recipeIngr(type='text', 
                                                      name='ingredientNew', 
                                                      placeholder='Ingredient'
-                                                     data-bind="value: newIngr")
+                                                     data-bind="value: newIngr, valueUpdate: 'afterkeydown', executeOnEnter: addNewIngr")
                                 .span1
                                     button.btn.btn-info(type='button', data-bind="click: addNewIngr") +                       
                     .control-group
@@ -91,7 +91,7 @@ html
                                     input(type='text', 
                                           name='stepNew', 
                                           placeholder='Instructions'
-                                          data-bind="value: newMethodStep")
+                                          data-bind="value: newMethodStep, valueUpdate: 'afterkeydown', executeOnEnter: addNewMethodStep")
                                 .span1
                                     button.btn.btn-info(type='button', data-bind="click: addNewMethodStep") +
                     .control-group
@@ -102,5 +102,5 @@ html
                                     textarea.wide-text-area(name='method', cols='90', rows='1', data-bind='value: $data')
                                 .span1
                                     button.btn.btn-danger(type='button', data-bind="click: $root.removeMethodStep") -
-        a(href="/")!= "Back to Recipe List"
-        button.btn(type='button', data-bind="click: recipe().save") Save via ajax
+        button.btn(onclick="window.location.href='/'") Back
+        button.btn(type='button', data-bind="click: recipe().save") Save

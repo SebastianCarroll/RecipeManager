@@ -6,8 +6,8 @@ require.config({
     }
 });
 
-require(['knockout', 'jquery', 'recipeUtils/cookTime', 'recipeUtils/recipe'], 
-    function(ko, $, time, Recipe) {
+require(['knockout', 'jquery', 'recipeUtils/cookTime', 'recipeUtils/recipe', 'lib/knockoutExtensions'], 
+    function(ko, $, time, Recipe, koExt) {
     
     function mainViewModel() {
         var self = this;
@@ -19,10 +19,13 @@ require(['knockout', 'jquery', 'recipeUtils/cookTime', 'recipeUtils/recipe'],
         
         self.addNewIngr = function () {
             self.recipe().ingredients.push(self.newIngr());
+            self.newIngr('');
         };
+        
         self.addNewMethodStep = function () {
             self.recipe().method.push(self.newMethodStep());
-        }
+            self.newMethodStep('');
+        };
         
         self.createAlert = function () {
             alert("Yay!");
