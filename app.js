@@ -53,20 +53,20 @@ app.get('/all', function(req, res) {
       
 
 app.get('/recipe/new', function(req, res) {
-    res.render('recipe_new', {
+    res.render('recipe_edit', {
         title: 'New Recipe'
     });
 });
 
-//save new recipe
+// Save new recipe
 app.post('/recipe/new', function(req, res){
     recipeProvider.save(req.body, 
     function( error, docs) {
-        res.redirect('/')
+        res.redirect('/');
     });
 });
 
-//view a recipe
+// View a recipe
 app.get('/recipe/:id/view', function(req, res) {
         recipeProvider.findById(req.param('_id'), 
             function(error, recipe) {

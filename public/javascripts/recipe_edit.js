@@ -23,7 +23,12 @@ require(['knockout', 'jquery', 'recipeUtils/cookTime', 'recipeUtils/recipe', 'li
     function mainViewModel() {
         var self = this;
         
-        self.recipe = ko.observable(new Recipe(getRecipeObject()));
+        // getRecipeObject is from global code from the server (check jade code)
+        if(getRecipeObject) {
+            self.recipe = ko.observable(new Recipe(getRecipeObject()));
+        } else {
+            self.recipe = ko.observable(new Recipe());
+        }
         
         self.newIngr = ko.observable('');
         self.newMethodStep = ko.observable('');
@@ -45,11 +50,8 @@ require(['knockout', 'jquery', 'recipeUtils/cookTime', 'recipeUtils/recipe', 'li
         self.removeMethodStep = function(step, event) {
             self.recipe().method.remove(step);
         };
-        
-        self.createAlert = function () {
-            alert("Yay!");
-        };
     };
+    
     var mainVM = new mainViewModel();
     ko.applyBindings(mainVM);
     //$(document).ready(mainVM.ajaxReload());

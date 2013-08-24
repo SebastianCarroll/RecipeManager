@@ -24,7 +24,8 @@ function(ko, Ingr, CookTime, formU) {
         self.save = function() {
             console.log('Convert to JSON');
             var jsSelf = ko.toJSON(self),
-                url = '/recipe/:id/edit?_id=' + self._id();
+                id = self._id(),
+                url = id ? '/recipe/:id/edit?_id=' + self._id() : '/recipe/new';
             console.log('Saving to server');
             // Save via ajax
             $.ajax({
@@ -33,8 +34,10 @@ function(ko, Ingr, CookTime, formU) {
                 contentType:"application/json; charset=utf-8",
                 data: jsSelf,
                 success: function (recipes, arg2, arg3) {
-                    console.log("Success!");
                     alert('Success!');
+                },
+                failure: function (recipes, arg2, arg3) {
+                    alert('Failure!');
                 }
             }); 
         };

@@ -7,7 +7,7 @@ html
     script        
         function getRecipeObject() {
             var r = '!{recipeJSON}';
-            return JSON.parse(r);
+            return r ? JSON.parse(r) : "";
             }
     script(type='text/javascript', src='/javascripts/lib/jquery-2.0.2.js')
     script(type='text/javascript', src='/javascripts/lib/bootstrap.js')
