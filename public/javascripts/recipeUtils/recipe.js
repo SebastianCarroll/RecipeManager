@@ -98,7 +98,9 @@ function(ko, Ingr, CookTime, formU) {
                     } else if(key === "ingredients"){
                         // Change this so that ingredients becomes an 
                         // observableArray of observables
-                        self[key](val ? val : self[key]());
+                        self[key](val ? makeAllElementsObservables(val) : self[key]());
+                    } else if (key === "method") {
+                        self[key](val ? makeAllElementsObservables(val) : self[key]());
                     }
                     else {
                         self[key](val ? val : self[key]());
@@ -106,6 +108,16 @@ function(ko, Ingr, CookTime, formU) {
                 }
             });
         };
+        
+        function makeAllElementsObservables(array) {
+            return ko.utils.arrayMap(array, function(item) {
+                return ko.observable(item);
+            });
+            
+            function makeObs(value,i){
+                return ko.observable(value);
+            }
+        }
         
         //constructor? This seems odd
         self.update(init);
