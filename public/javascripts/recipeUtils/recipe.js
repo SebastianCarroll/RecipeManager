@@ -22,7 +22,11 @@ function(ko, Ingr, CookTime, formU) {
         self.nutritInfo = ko.observable('');
         
         self.save = function() {
-            console.log('Convert to JSON');
+            console.log('Convert to JSON'); 
+            
+            self.ingredients = convertObsArrToArr(self.ingredients);
+            self.method = convertObsArrToArr(self.method);
+            
             var jsSelf = ko.toJSON(self),
                 id = self._id(),
                 url = id ? '/recipe/:id/edit?_id=' + self._id() : '/recipe/new';
@@ -44,6 +48,7 @@ function(ko, Ingr, CookTime, formU) {
         
         // Intermediate step towards 
         self.toJSON = function() {
+
             var jsSelf =ko.toJS(self),
                 ignoreList = ['_id'],
                 removeList = [];
@@ -111,12 +116,15 @@ function(ko, Ingr, CookTime, formU) {
         
         function makeAllElementsObservables(array) {
             return ko.utils.arrayMap(array, function(item) {
-                return ko.observable(item);
+                return {obs: ko.observable(item)};
             });
-            
-            function makeObs(value,i){
-                return ko.observable(value);
-            }
+        }
+        
+        function convertObsArrToArr(obsArr) {
+            var jsObj = ko.toJS(obsArr);
+            return $.map(jsObj, function (obj, i) {
+                return obj.obs;
+            });
         }
         
         //constructor? This seems odd

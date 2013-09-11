@@ -43,7 +43,9 @@ require(['knockout', 'jquery', 'recipeUtils/cookTime', 'recipeUtils/recipe', 'li
         };
         
         self.addNewMethodStep = function () {
-            self.recipe().method.push(self.newMethodStep());
+            // TODO: shouldnt know it is an array here
+            // Make interface method
+            self.recipe().method.push({obs: self.newMethodStep()});
             self.newMethodStep('');
         };
         

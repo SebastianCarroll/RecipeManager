@@ -75,7 +75,7 @@ html
                         .controls(data-bind="foreach: recipe().ingredients")
                             .row-fluid
                                 .span11
-                                    input(type='text', name='ingredients', placeholder='Ingredients', data-bind="value: $data" )
+                                    input(type='text', name='ingredients', placeholder='Ingredients', data-bind="value: $data.obs" )
                                 .span1
                                     button.btn.btn-danger(type='button', data-bind="click: $root.removeIngr") -
                                     //button.btn.btn-info(type='button', data-bind='visible: (ingredients.length === 1)') +
@@ -99,7 +99,7 @@ html
                         .controls(data-bind="foreach: recipe().method")
                             .row-fluid
                                 .span11
-                                    textarea.wide-text-area(name='method', cols='90', rows='1', data-bind='value: $data')
+                                    textarea.wide-text-area(name='method', cols='90', rows='1', data-bind='value: $data.obs')
                                 .span1
                                     button.btn.btn-danger(type='button', data-bind="click: $root.removeMethodStep") -
         button.btn(onclick="window.location.href='/'") Back
